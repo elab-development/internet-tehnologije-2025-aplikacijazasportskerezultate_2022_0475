@@ -6,7 +6,6 @@ export default function Home() {
       <h1 className="section-title">AKTUELNI DOGAĐAJI🔥</h1>
 
       <div className="events-grid">
-        {/* Event 1 */}
         <Link href="/events/1" className="event-card">
           <img src="/event1.jpg" alt="Football match" />
           <div className="event-info">
@@ -14,10 +13,10 @@ export default function Home() {
             <p className="sport">Fudbal</p>
             <p>📅 25.03.2026</p>
             <p>📍 Stadion "Rajko Mitić"</p>
+            <div className="event-result">3 : 1</div>
           </div>
         </Link>
 
-        {/* Event 2 */}
         <Link href="/events/2" className="event-card">
           <img src="/event2.png" alt="Basketball match" />
           <div className="event-info">
@@ -25,10 +24,10 @@ export default function Home() {
             <p className="sport">Košarka</p>
             <p>📅 28.01.2026</p>
             <p>📍 Belgrade Arena</p>
+            <div className="event-result">88 : 82</div>
           </div>
         </Link>
-
-        {/* Event 3 */}
+        
         <Link href="/events/3" className="event-card">
           <img src="/event3.jpg" alt="Tennis tournament" />
           <div className="event-info">
@@ -36,6 +35,7 @@ export default function Home() {
             <p className="sport">Tenis</p>
             <p>📅 02.01.2026</p>
             <p>📍 Wimbledon Centre Court</p>
+            <div className="event-result">3 : 2</div>
           </div>
         </Link>
 
@@ -46,6 +46,7 @@ export default function Home() {
             <p className="sport">Košarka</p>
             <p>📅 28.02.2026</p>
             <p>📍Palau Blaugrana</p>
+            <div className="event-result">90 : 85</div>
           </div>
         </Link>
       </div>
