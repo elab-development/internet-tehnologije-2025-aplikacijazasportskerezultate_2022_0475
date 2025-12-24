@@ -44,6 +44,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/register">
                 <button className="nav-button">Register</button>
               </Link>
+              <Link href="/contact">
+                <button className="nav-button">Kontakt</button>
+              </Link>
             </div>
           </nav>
         </header>
