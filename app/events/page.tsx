@@ -1,31 +1,12 @@
 "use client";
-
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-
-type Event = {
-  id: string;
-  title: string;
-  sport: string;
-  date: string;
-  location: string;
-  image: string;
-  score: string;
-  status: string;
-};
-
-const events: Event[] = [
-  { id: "1", title: "Crvena Zvezda vs Partizan", sport: "fudbal", date: "25.03.2026", location: 'Stadion "Rajko Mitić"', image: "/event1.jpg", score: "3 : 1", status: "Završeno" },
-  { id: "2", title: "Crvena Zvezda vs Olympiacos", sport: "kosarka", date: "28.01.2026", location: "Belgrade Arena", image: "/event2.png", score: "88 : 82", status: "Završeno" },
-  { id: "3", title: "Djokovic vs Sinner", sport: "tenis", date: "02.01.2026", location: "Wimbledon – Centre Court", image: "/event3.jpg", score: "3 : 2", status: "Završeno" },
-  { id: "4", title: "BC Barcelona vs Partizan", sport: "kosarka", date: "28.02.2026", location: "Palau Blaugrana", image: "/event4.jpg", score: "90 : 85", status: "Završeno" },
-];
+import events from "@/data/events.json";
 
 export default function EventsPage() {
   const searchParams = useSearchParams();
   const sportFilter = searchParams.get("sport");
 
-  // filtriramo događaje
   const filteredEvents = sportFilter
     ? events.filter((e) => e.sport.toLowerCase() === sportFilter.toLowerCase())
     : events;
@@ -52,4 +33,3 @@ export default function EventsPage() {
     </main>
   );
 }
-

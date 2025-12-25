@@ -459,6 +459,81 @@ h1, h2 {
   color: #0070f3;
 }
 
+.event-details {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f2f6fb; 
+  min-height: calc(100vh - 120px);
+}
 
+.event-banner {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.event-details-card {
+  background-color: white;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  max-width: 900px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.event-details-card h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #01131d;
+}
+
+.event-meta {
+  display: flex;
+  gap: 2rem;
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.event-score {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2ecc71;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  width: fit-content;
+  align-self: center;
+}
+
+.event-stats {
+  margin-top: 1rem;
+}
+
+.event-stats h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.event-stats ul {
+  list-style: none;
+  padding: 0;
+}
+
+.event-stats li {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+  color: #333;
+}
 
 
