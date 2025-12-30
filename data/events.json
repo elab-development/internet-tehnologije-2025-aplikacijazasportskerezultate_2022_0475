@@ -7,7 +7,15 @@
     "location": "Stadion Rajko Mitić",
     "image": "/event1.jpg",
     "result": "3 : 1",
-    "status": "Završeno"
+    "status": "Završeno",
+    "stats": {
+      "possession": [58, 42],
+      "shots": [14, 9],
+      "shotsOnTarget": [7, 3],
+      "corners": [6, 4],
+      "fouls": [12, 15],
+      "yellowCards": [2, 4]
+    }
   },
   {
     "id": "2",
@@ -17,7 +25,15 @@
     "location": "Belgrade Arena",
     "image": "/event2.png",
     "result": "88 : 82",
-    "status": "Završeno"
+    "status": "Završeno",
+    "stats": {
+      "fieldGoalPercent": [48, 44],
+      "threePointers": [11, 9],
+      "rebounds": [38, 32],
+      "assists": [19, 16],
+      "turnovers": [11, 14],
+      "freeThrows": [15, 12]
+    }
   },
   {
     "id": "3",
@@ -27,9 +43,17 @@
     "location": "Wimbledon Centre Court",
     "image": "/event3.jpg",
     "result": "3 : 2",
-    "status": "Završeno"
+    "status": "Završeno",
+    "stats": {
+      "aces": [14, 18],
+      "firstServe": [68, 64],
+      "breakPointsWon": [5, 3],
+      "winners": [42, 45],
+      "unforcedErrors": [28, 35],
+      "totalPoints": [156, 148]
+    }
   },
-   {
+  {
     "id": "4",
     "title": "BC Barcelona vs Partizan",
     "sport": "kosarka",
@@ -37,7 +61,15 @@
     "location": "Palau Blaugrana",
     "image": "/event4.jpg",
     "result": "90 : 85",
-    "status": "Završeno"
+    "status": "Završeno",
+    "stats": {
+      "fieldGoalPercent": [51, 47],
+      "threePointers": [12, 10],
+      "rebounds": [34, 35],
+      "assists": [22, 18],
+      "steals": [7, 5],
+      "fouls": [18, 22]
+    }
   }
 ]
 
