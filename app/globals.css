@@ -313,6 +313,23 @@ h1, h2 {
   font-weight: 600;
 }
 
+.auth-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  background-color: white;
+  color: #01131d;
+  box-sizing: border-box;
+  display: block;
+}
+
+.auth-input:focus {
+  outline: 2px solid #0070f3;
+}
+
 .auth-card form {
   display: flex;
   flex-direction: column;
