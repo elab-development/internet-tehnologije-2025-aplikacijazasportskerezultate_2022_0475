@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Input from "../components/Input";
 
 export default function RegisterPage() {
@@ -8,6 +9,11 @@ export default function RegisterPage() {
     email: "",
     password: "",
   });
+  const [message, setMessage] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -17,16 +23,48 @@ export default function RegisterPage() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Podaci za registraciju:", formData);
+    setLoading(true);
+    setMessage("");
+    setSuccess(false);
+
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setMessage(data.error || "Greška pri registraciji");
+        setSuccess(false);
+      } else {
+        setMessage("Uspešno ste registrovani! Bićete preusmereni na login...");
+        setSuccess(true);
+
+        console.log("Registrovani korisnik:", data.user);
+
+        setTimeout(() => {
+          router.push("/login");
+        }, 2000);
+      }
+    } catch (err) {
+      console.error("Greška pri registraciji:", err);
+      setMessage("Greška pri registraciji");
+      setSuccess(false);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <main className="auth-page">
       <div className="auth-card">
         <h1>Register</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-2">
           <Input
             type="text"
             placeholder="Username"
@@ -51,10 +89,21 @@ export default function RegisterPage() {
             onChange={handleChange}
             required
           />
-          <button type="submit" className="auth-button">
-            Register
+          <button
+            type="submit"
+            className="auth-button"
+            disabled={loading}
+          >
+            {loading ? "Registracija..." : "Register"}
           </button>
         </form>
+
+        {message && (
+          <p className={`auth-message ${success ? "success" : "error"}`}>
+            {message}
+          </p>
+        )}
+
         <p>
           Već imate nalog? <a href="/login">Prijavite se</a>
         </p>
