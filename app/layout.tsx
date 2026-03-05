@@ -53,21 +53,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <div className="sub-header">
           <nav>
-            <Link href="/events?sport=fudbal">
+            <Link href="/events?sportId=1">
               <img src="/football.png" alt="Football" className="sport-icon" />
               FOOTBALL
             </Link>
-            <Link href="/events?sport=kosarka">
+
+            <Link href="/events?sportId=2">
               <img src="/basketball.png" alt="Basketball" className="sport-icon" />
               BASKETBALL
             </Link>
-            <Link href="/events?sport=tenis">
+
+            <Link href="/events?sportId=3">
               <img src="/tennis.png" alt="Tennis" className="sport-icon" />
               TENNIS
             </Link>
-            <Link href="/events?sport=mma">
-             <img src="/mma.png" alt="MMA" className="sport-icon" />
-             MMA
+
+            <Link href="/events?sportId=4">
+              <img src="/mma.png" alt="MMA" className="sport-icon" />
+              MMA
             </Link>
           </nav>
         </div>

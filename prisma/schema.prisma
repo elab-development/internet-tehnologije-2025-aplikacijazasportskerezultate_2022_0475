@@ -32,27 +32,28 @@ model Event {
   ticketPrice Float
   sportId     Int
   sport       Sport       @relation(fields: [sportId], references: [id])
+  imageUrl    String?
   result      Result?
   statistics  Statistic[]
   users       User[]      @relation("UserEvents")
 }
 
 model Result {
-  id      Int    @id @default(autoincrement())
-  team1   Int
-  team2   Int
-  status  String
-  eventId Int    @unique
-  event   Event  @relation(fields: [eventId], references: [id])
+  id        Int    @id @default(autoincrement())
+  homeScore Int
+  awayScore Int
+  status    String
+  eventId   Int    @unique
+  event     Event  @relation(fields: [eventId], references: [id])
 }
 
 model Statistic {
-  id      Int    @id @default(autoincrement())
-  player  String
-  points  Int
-  minutes Int
-  eventId Int
-  event   Event  @relation(fields: [eventId], references: [id])
+  id        Int   @id @default(autoincrement())
+  statName  String
+  homeValue Int
+  awayValue Int
+  eventId   Int
+  event     Event @relation(fields: [eventId], references: [id])
 }
 
 enum Role {

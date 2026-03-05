@@ -1,30 +1,45 @@
-"use client";
-import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import events from "@/data/events.json";
+import { prisma } from "@/lib/prisma";
 
-export default function EventsPage() {
-  const searchParams = useSearchParams();
-  const sportFilter = searchParams.get("sport");
+export default async function EventsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ sportId?: string }>;
+}) {
+  const { sportId } = await searchParams;
+  const sportIdNum = sportId ? parseInt(sportId, 10) : undefined;
 
-  const filteredEvents = sportFilter
-    ? events.filter((e) => e.sport.toLowerCase() === sportFilter.toLowerCase())
-    : events;
+  let sportName = "Svi događaji";
+
+  if (sportIdNum) {
+    const sport = await prisma.sport.findUnique({
+      where: { id: sportIdNum },
+    });
+
+    if (sport) {
+      sportName = `${sport.name.toUpperCase()} događaji`;
+    }
+  }
+
+  const events = await prisma.event.findMany({
+    where: sportIdNum ? { sportId: sportIdNum } : undefined,
+    include: { sport: true },
+    orderBy: { date: "asc" },
+  });
 
   return (
     <main className="homepage">
-      <h1 className="section-title">
-        {sportFilter ? `${sportFilter.toUpperCase()} događaji` : "Svi događaji"}
-      </h1>
+      <h1 className="section-title">{sportName}</h1>
 
       <div className="events-grid">
-        {filteredEvents.map((event) => (
+        {events.map((event) => (
           <Link key={event.id} href={`/events/${event.id}`} className="event-card">
-            <img src={event.image} alt={event.title} />
+            <img src={event.imageUrl ?? "/event1.jpg"} alt={event.title} />
+
             <div className="event-info">
               <h3>{event.title}</h3>
-              <p className="sport">{event.sport}</p>
-              <p>📅 {event.date}</p>
+              <p className="sport">{event.sport.name}</p>
+              <p>📅 {event.date.toLocaleDateString("sr-RS")}</p>
               <p>📍 {event.location}</p>
             </div>
           </Link>
