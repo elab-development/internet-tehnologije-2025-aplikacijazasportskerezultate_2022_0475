@@ -1,0 +1,605 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SwaggerUI API",
+    "version": "1.0.0",
+    "description": "API dokumentacija za aplikaciju za sportske rezultate."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Lokalni server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "CookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "auth_token"
+      }
+    },
+    "schemas": {
+      "LoginRequest": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "luka@example.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "test123"
+          }
+        }
+      },
+      "LoginSuccessResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Uspešno prijavljen"
+          }
+        }
+      },
+      "LogoutSuccessResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Uspešno ste se odjavili"
+          }
+        }
+      },
+      "RegisterRequest": {
+        "type": "object",
+        "required": ["username", "email", "password"],
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "luka123"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "luka@example.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "test123"
+          }
+        }
+      },
+      "PublicUser": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "username": {
+            "type": "string",
+            "example": "luka123"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "luka@example.com"
+          },
+          "role": {
+            "type": "string",
+            "enum": ["ADMIN", "USER", "GUEST"],
+            "example": "USER"
+          }
+        }
+      },
+      "RegisterSuccessResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "example": "jwt-token-example"
+          },
+          "user": {
+            "$ref": "#/components/schemas/PublicUser"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "username": {
+            "type": "string",
+            "example": "luka123"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "luka@example.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "$2b$10$hashedPasswordExample"
+          },
+          "role": {
+            "type": "string",
+            "enum": ["ADMIN", "USER", "GUEST"],
+            "example": "USER"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-03-06T12:00:00.000Z"
+          }
+        }
+      },
+      "UsersResponse": {
+        "type": "object",
+        "properties": {
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        }
+      },
+      "EventRequest": {
+        "type": "object",
+        "required": ["title", "date", "location", "ticketPrice", "sportId"],
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Crvena zvezda vs Partizan"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-03-10T18:00:00.000Z"
+          },
+          "location": {
+            "type": "string",
+            "example": "Beograd"
+          },
+          "ticketPrice": {
+            "type": "number",
+            "format": "float",
+            "example": 1200
+          },
+          "sportId": {
+            "type": "integer",
+            "example": 1
+          },
+          "imageUrl": {
+            "type": "string",
+            "nullable": true,
+            "example": "/event1.jpg"
+          }
+        }
+      },
+      "EventUpdateRequest": {
+        "type": "object",
+        "required": ["id"],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "title": {
+            "type": "string",
+            "example": "Crvena zvezda vs Partizan"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-03-10T18:00:00.000Z"
+          },
+          "location": {
+            "type": "string",
+            "example": "Beograd"
+          },
+          "ticketPrice": {
+            "type": "number",
+            "format": "float",
+            "example": 1200
+          },
+          "sportId": {
+            "type": "integer",
+            "example": 1
+          },
+          "imageUrl": {
+            "type": "string",
+            "nullable": true,
+            "example": "/event1.jpg"
+          }
+        }
+      },
+      "Event": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "title": {
+            "type": "string",
+            "example": "Crvena zvezda vs Partizan"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-03-10T18:00:00.000Z"
+          },
+          "location": {
+            "type": "string",
+            "example": "Beograd"
+          },
+          "ticketPrice": {
+            "type": "number",
+            "format": "float",
+            "example": 1200
+          },
+          "sportId": {
+            "type": "integer",
+            "example": 1
+          },
+          "imageUrl": {
+            "type": "string",
+            "nullable": true,
+            "example": "/event1.jpg"
+          }
+        }
+      },
+      "DeleteEventRequest": {
+        "type": "object",
+        "required": ["id"],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          }
+        }
+      },
+      "DeleteEventResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "Greška na serveru"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/api/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Prijava korisnika",
+        "description": "Prijavljuje korisnika i postavlja auth_token kolačić.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Uspešna prijava",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Email i lozinka su obavezni",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Neispravan email ili lozinka",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Greška na serveru",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Odjava korisnika",
+        "description": "Briše auth_token kolačić i odjavljuje korisnika.",
+        "responses": {
+          "200": {
+            "description": "Uspešna odjava",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogoutSuccessResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Greška prilikom logout-a",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/register": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Registracija korisnika",
+        "description": "Kreira novog korisnika.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Uspešna registracija",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegisterSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Neispravni ili zauzeti podaci",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Interna serverska greška",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/events": {
+      "post": {
+        "tags": ["Events"],
+        "summary": "Kreiranje događaja",
+        "description": "Kreira novi sportski događaj. Potrebna autentifikacija.",
+        "security": [
+          {
+            "CookieAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Događaj uspešno kreiran",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Events"],
+        "summary": "Izmena događaja",
+        "description": "Menja postojeći događaj na osnovu prosleđenog id-ja.",
+        "security": [
+          {
+            "CookieAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Događaj uspešno izmenjen",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Events"],
+        "summary": "Brisanje događaja",
+        "description": "Briše događaj na osnovu prosleđenog id-ja.",
+        "security": [
+          {
+            "CookieAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteEventRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Događaj uspešno obrisan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteEventResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Lista korisnika",
+        "description": "Vraća sve korisnike iz baze.",
+        "responses": {
+          "200": {
+            "description": "Lista korisnika",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Greška na serveru",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
