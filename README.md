@@ -42,21 +42,25 @@ Aplikacija omogućava:
 ```bash
 git clone https://github.com/elab-development/internet-tehnologije-2025-aplikacijazasportskerezultate_2022_0475.git
 cd internet-tehnologije-2025-aplikacijazasportskerezultate_2022_0475
+```
 
 2. Instalacija zavisnosti
 
 ```bash
 npm install
+```
 
 3. Pokretanje aplikacije u development režimu
 
 ```bash
 npm run dev
+```
 
 4. Otvoriti aplikaciju u browseru
 
 ```bash
 http://localhost:3000
+```
 
 
 
