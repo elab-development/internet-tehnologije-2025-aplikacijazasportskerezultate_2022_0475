@@ -62,6 +62,14 @@ npm run dev
 http://localhost:3000
 ```
 
+# Pokretanje aplikacije pomoću Docker-a
 
+1. Build i pokretanje kontejnera
+```bash
+docker-compose up --build
+```
 
-
+2. Nakon pokretanja aplikacija je dostupna na:
+```bash
+http://localhost:3000
+```
